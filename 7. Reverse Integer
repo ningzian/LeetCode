@@ -5,7 +5,7 @@
   难点：反转后溢出的情况，要返回零
   知识点：<limit.h>中定义了INT_MAX和INT_MIN
   疑问：如果y*10没有溢出，+x%10溢出了，会怎么样，这种情况没有考虑
-*/
+  */
 class Solution {
 public:
     int reverse(int x) 
