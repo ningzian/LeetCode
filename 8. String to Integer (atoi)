@@ -1,0 +1,51 @@
+/*难点：多种不同情况的考虑
+  1，去掉字符串前面的空格
+  2，检测符号位，如果有两个符号，则返回0
+  3，检测非数字字符，如果有非数字，则去掉后面的。比如234ab34,则改成234
+  4，此时去掉所有非正常情况
+  5，先转换成double
+  6，检测有没有溢出
+  7，return
+*/
+class Solution {
+public:
+    int myAtoi(string str) 
+    {
+        int flag = 0;
+        //去掉前面的空格
+        auto i = str.find_first_not_of(' ',0);
+        if(i!=string::npos)
+        {
+           str = str.substr(i);
+        }
+        
+        //检测符号位
+        i = str.find_first_not_of("+-",0);
+        if(i>1)//符号位不止一个
+        {
+            return 0;
+        }
+        else if(i==1)
+        {
+            if(str[0]=='-')
+            flag = 1;
+            str = str.substr(1);
+        }
+        //检测字母等非数字类型
+        i= str.find_first_not_of("0123456789",0);
+        if(i!=string::npos) str.erase(i);
+        //字符串空
+        if(str.size()==0)
+        {
+            return 0;
+        }
+        //此时str只剩下数字，开始转换
+        double y1;
+        y1 = stod(str);
+        if(flag) y1 = -y1;
+        if(y1>INT_MAX) return INT_MAX;
+        else if(y1<INT_MIN) return INT_MIN;
+        else return (int)y1;
+       
+    }
+};
