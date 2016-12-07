@@ -1,0 +1,21 @@
+//比较头尾数字是否相同
+bool isPalindrome(int x) {
+        if(x<0) return 0;
+        int len = 1;
+        while(x/len>=10)
+        {
+            len*=10;
+        }
+        
+        while(x!=0)// ！！！这里必须是x!=0.而不是x>=10;因为会遇到100021的情况
+        {
+            int left = x/len;
+            int right = x%10;
+            if(left!=right) return false;
+            
+            x = (x%len)/10;
+            len /=100;
+        }
+        return true;
+        
+    }
