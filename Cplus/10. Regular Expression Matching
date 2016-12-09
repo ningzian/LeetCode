@@ -1,0 +1,35 @@
+/*
+难点:*代表前面的字母重复0,1,2...次
+    aab和c*a*b匹配，第一个*代表前面的字母重复0次，第二个*代表重复1次
+知识点：动态规划。当问题很大的时候，就分解为子问题。同时子问题有重复，考虑使用动态规划求解。
+*/
+bool isMatch(string s, string p) {
+        
+        int m = s.size(), n = p.size();
+        vector<vector<bool>> f(m+1, vector<bool>(n+1,false));
+        f[0][0]=true;
+        /*for(int i = 1;i<=m;i++)//因为已经初始化为false，所以注释掉了
+        {
+            f[i][0]=false;
+        }*/
+        for(int j = 1;j<=n+1;j++)
+        {
+            f[0][j]=(j>1)&&(p[j-1]=='*')&&(f[0][j-2]);//只有*才能去掉前面的字符
+        }
+        for(int i = 1;i<=m;i++)
+            for(int j =1;j<=n;j++)
+            {
+                if(p[j-1]!='*')
+                {
+                    f[i][j] = f[i-1][j-1]&&(s[i-1]==p[j-1]||p[j-1]=='.');
+                }
+                else
+                {
+                    f[i][j] = f[i][j-2]||(s[i-1]==p[j-2]||p[j-2]=='.')&&(f[i-1][j]);
+                }
+            }
+        
+        return f[m][n];
+        
+        
+    }
