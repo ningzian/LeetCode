@@ -1,0 +1,25 @@
+int lengthOfLongestSubstring(string s)
+{
+    int max = 0, i = 0, j = 0;
+    unordered_set<char> exist;
+    while (j < s.size())
+    {
+      if (exist.find(s[j]) == exist.end())//不包含
+      {
+        exist.insert(s[j]);
+        j++;
+      }
+      else//第j有重复
+      {
+        max = max > (j - i) ? max : (j - i);
+        while (s[i] != s[j])//删除重复之前的exist
+        {
+          exist.erase(s[i]);
+          i++;
+        }
+        i++;
+        j++;
+      }
+    }
+    return max;
+  }
