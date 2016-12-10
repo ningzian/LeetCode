@@ -1,0 +1,34 @@
+/*难点：穷举法超过了时间限制
+  解决方法：大部分算法都用到的，用两个指针（左指针和右指针），来回调节。
+           比较两个数的大小，只有小的向里移动，才有可能容量更大。
+*/
+  
+int maxArea(vector<int>& height) 
+    {
+        
+        int n = height.size()-1;
+        auto l = height.begin();
+        auto r = height.end()-1;
+        int out = ((*l)<(*r)? (*l):(*r))*n;
+        while(l<r)
+        {
+            if(*l<*r)
+            {
+                l++;
+                n--;
+                int a = ((*l)<(*r)? (*l):(*r))*n;
+                if(out<a) out = a;
+            }
+            else
+            {
+                r--;
+                n--;
+                int a = ((*l)<(*r)? (*l):(*r))*n;
+                if(out<a) out = a;
+            }
+        }
+        return out;
+        
+        
+        
+    }
