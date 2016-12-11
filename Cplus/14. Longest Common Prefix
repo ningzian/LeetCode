@@ -1,0 +1,22 @@
+/*最简单的一个一个比较。注意输入为空或者只有一个字符串*/
+string longestCommonPrefix(vector<string>& strs) {
+        
+        if(strs.size()==0) return "";
+        else if(strs.size()==1) return strs[0];
+        
+        char tem;
+        int cnt = 0;
+        string out;
+        for(int j=0;;j++)//j是第几个字母
+        {
+            tem = strs[0][j];
+           for(auto i = strs.begin()+1;i<strs.end();i++)
+           {
+               if((j==(*i).size())||((*i)[j]!=tem)) return out;
+               
+           }
+           out.push_back(tem);
+        }
+        return out;
+        
+    }
