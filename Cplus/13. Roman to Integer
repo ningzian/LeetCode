@@ -1,0 +1,82 @@
+/* 从后往前遍历，每次先判断下一个是不是比本次的小
+一定要注意什么时候++*/
+int romanToInt(string s) 
+    {
+        
+        int result = 0;
+        auto i = s.rbegin();
+        while(i<s.rend())
+        {
+            switch (*i)
+            {
+                case 'I':
+                {
+                    result+=1;
+                    i++;
+                    break;
+                } 
+                case 'V':
+                {
+                    if(*(++i)=='I')
+                    {
+                        result+=4;
+                        i++;
+                    }
+                    else result+=5;
+                    break;
+                }
+                case 'X':
+                {
+                    if(*(++i)=='I')
+                    {
+                        result+=9;
+                        i++;
+                    }
+                    else result+=10;
+                    break;
+                }
+                case 'L':
+                {
+                    if(*(++i)=='X')
+                    {
+                        result+=40;
+                        i++;
+                    }
+                    else result+=50;
+                    break;
+                }
+                case 'C':
+                {
+                    if(*(++i)=='X')
+                    {
+                        result+=90;
+                        i++;
+                    }
+                    else result+=100;
+                    break;
+                }
+                case 'D':
+                {
+                    if(*(++i)=='C')
+                    {
+                        result+=400;
+                        i++;
+                    }
+                    else result+=500;
+                    break;
+                }
+                case 'M':
+                {
+                    if(*(++i)=='C')
+                    {
+                        result+=900;
+                        i++;
+                    }
+                    else result+=1000;
+                    break;
+                }
+            }
+        }
+        return result;
+        
+    }
