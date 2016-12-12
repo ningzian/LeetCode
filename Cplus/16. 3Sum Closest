@@ -1,0 +1,25 @@
+/* 与上一题思路一致，先固定i，移动j和k。找此时i的三个数和的最小值。
+  函数accumulate(迭代器,迭代器,int)；两个迭代器之间求和； */
+int threeSumClosest(vector<int>& nums, int target) 
+    {
+        if(nums.size()<=3) return accumulate(nums.begin(),nums.end(),0);
+        
+        sort(nums.begin(),nums.end());
+        int ans=nums[0]+nums[1]+nums[2];
+        
+        auto i = nums.begin();
+        while(i<nums.end()-2)
+        {
+            auto j = i+1;
+            auto k = nums.end()-1;
+            while(j<k)
+            {
+                int sum = (*i)+(*j)+(*k);
+                if(abs(target-sum)<abs(target-ans)) ans = sum;
+                sum<target? j++:k--;
+            }
+            i++;
+        }
+        return ans;
+        
+    }
