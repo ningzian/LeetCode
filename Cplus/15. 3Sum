@@ -1,0 +1,35 @@
+/* 遍历i，j=i+1,k=n-1;寻找j和k，使得三个相加等于0 */
+vector<vector<int>> threeSum(vector<int>& nums) 
+    {
+        vector<vector<int>> ans;
+        sort(nums.begin(),nums.end());
+        auto i = nums.begin();
+        
+        while(i<nums.end())
+        {
+            auto j = i+1;
+            auto k = nums.end()-1;
+            while(j<k)
+            {
+                if((*i)+(*j)+(*k)<0) j++;
+                else if((*i)+(*j)+(*k)>0) k--;
+                else
+                {
+                    vector<int> tem;
+                    tem.push_back(*i);
+                    tem.push_back(*j);
+                    tem.push_back(*k);
+                    ans.push_back(tem);
+                    while((j<k)&&((*k)==(*(k-1)))) k--; 
+                    while((j<k)&&((*j)==(*(j+1)))) j++;
+                    k--;
+                    j++;
+                }
+                
+            }
+            while((*i)==(*(i+1))) i++;
+            i++;
+        }
+        return ans;
+        
+    }
