@@ -1,0 +1,85 @@
+/* 找一个数，求剩下的三个数和。 */
+vector<vector<int>> fourSum(vector<int>& nums, int target)
+    {
+        vector<vector<int>> ans;
+        int n = nums.size();
+        if(n<4) 
+            return ans;
+        
+        sort(nums.begin(),nums.end());
+        if((nums.front()*4>target)||(nums.back()*4)<target) return ans;
+        int z;
+        for(int i = 0;i<n-3;i++)
+        {
+            z=nums[i];
+            if((i>0)&&(z==nums[i-1])) continue;//避免重复
+            if((z+3*nums.back())<target) continue;//i太小
+            if(4*z>target) break;//i太大
+            if(4*z==target)
+            {
+                if((i+3<n)&&(nums[i+3]==z))
+                {
+                    vector<int> tem = {z,z,z,z};
+                    ans.push_back(tem);
+                    return ans;
+                }
+                break;
+            }
+            
+            threesum(nums,target-z,i+1,n-1,ans,z);
+        }
+        return ans;
+        
+    }
+    
+    void threesum(vector<int>& nums, int target,int i, int j, vector<vector<int>>& ans, int z1)
+    {
+        if((j-i)<2) return;
+        if(((3*nums[i])>target)||(3*nums[j]<target)) return;
+        
+        int k;//相当于上面函数中的i
+        int z;
+        for(k=i;k<j-1;k++)
+        {
+            z=nums[k];
+            if((k>i)&&(z==nums[k-1])) continue;//避免重复
+            if((z+2*nums[j])<target) continue;//k太小
+            if(3*z>target) break;//k太大
+            if(3*z==target)
+            {
+                if(((k+1)<j)&&(nums[k+2]==z))
+                {
+                    vector<int> tem={z1,z,z,z};
+                    ans.push_back(tem);
+                    return;
+                }
+                break;
+            }
+            twosum(nums,target-z,k+1,j,ans,z1,z);
+        }
+        return;
+        
+    }
+    
+    void twosum(vector<int>& nums, int target, int i, int j, vector<vector<int>>& ans,int z1,int z2)
+    {
+        if(i>=j) return;
+        if((2*nums[i]>target)||(2*nums[j]<target)) return;
+        
+        while(i<j)
+        {
+            int sum = nums[i]+nums[j];
+            if(sum==target)
+            {
+                int x = nums[i];
+                int y = nums[j];
+                vector<int> tem = {z1,z2,x,y};
+                ans.push_back(tem);
+                while(((++i)<j)&&(x==nums[i]));
+                while(((--j)>i)&&(y==nums[j]));
+            }
+            else if(sum<target) i++;
+            else j--;
+        }
+        return;
+    }
