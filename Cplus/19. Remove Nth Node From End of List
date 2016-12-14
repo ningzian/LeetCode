@@ -1,0 +1,30 @@
+ListNode* removeNthFromEnd(ListNode* head, int n) 
+    {
+        ListNode* tem = head;
+        int num=1;//总共有多少个
+        while(tem->next != NULL)
+        {
+            tem = tem->next;
+            num++;
+        }
+        int tar = num-n+1;//要删除的数
+        
+        tem = head;
+        if(tar==1)
+        {
+            return head->next;
+        }
+        else
+        {
+            int n1=1;
+            while(n1<(tar-1))
+            {
+                tem=tem->next;
+                n1++;
+            }
+            //ListNode* tem2 = tem->next;
+            tem->next = tem->next->next;
+            return head;
+        }
+        
+    }
