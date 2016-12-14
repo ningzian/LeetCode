@@ -1,0 +1,42 @@
+/* 使用栈的思想 */
+bool isValid(string s) 
+    {
+        deque<char> stac;//一个栈
+        for(char &i:s)
+        {
+            if((i=='(')||(i=='[')||(i=='{'))
+                stac.push_front(i);
+            else 
+            {
+                if(stac.empty()) return false;
+                
+                switch (i)
+                {
+                    case ')':
+                    {
+                        if(stac[0]=='(') stac.pop_front();
+                        else return false;
+                        break;
+                    }
+                    case ']':
+                    {
+                        if(stac[0]=='[') stac.pop_front();
+                        else return false;
+                        break;
+                    }
+                    case '}':
+                    {
+                        if(stac[0]=='{') stac.pop_front();
+                        else return false;
+                        break;
+                    }
+                }
+            
+            }
+        }
+        if(stac.empty())
+            return true;
+        else return false;
+        
+        
+    }
