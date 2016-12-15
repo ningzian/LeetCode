@@ -1,14 +1,14 @@
 /* 学会如何新建node */
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         
-        if(l1==NULL)
+        /*if(l1==NULL)
         {
             return l2;
         }
         else if(l2==NULL)
         {
             return l1;
-        }
+        }*/
         ListNode start(0) ;
         ListNode* k = &start;
         
