@@ -1,0 +1,17 @@
+/* 节点的指针，节点指针的指针，这几个关系一定要搞清楚 */
+ListNode* swapPairs(ListNode* head) {
+        
+        ListNode** cur = &head;
+        while(((*cur)!=NULL)&&((*cur)->next!=NULL))
+        {
+            ListNode* a = (*cur);
+            ListNode* b = (*cur)->next;
+            a->next = b->next;
+            b->next = a;
+            (*cur) = b;
+            cur = &(a->next);
+            
+        }
+        return head;
+        
+    }
