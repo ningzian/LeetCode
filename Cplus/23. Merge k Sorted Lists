@@ -1,0 +1,36 @@
+/* 优先队列、函数调用运算符 */
+struct compare
+ {
+     bool operator()(ListNode* a, ListNode*b)
+     {
+         return a->val > b->val;
+     }
+ };
+ 
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        
+        priority_queue<ListNode*, vector<ListNode*>, compare> q;
+        for(auto i:lists)
+        {
+            if(i) q.push(i);
+        }
+        if(q.empty()) return NULL;
+        
+        ListNode* res = q.top();
+        q.pop();
+        if(res->next) q.push(res->next);
+        ListNode* tail = res;
+        while(!q.empty())
+        {
+            tail->next = q.top();
+            q.pop();
+            tail = tail->next;
+            if(tail->next) q.push(tail->next);
+            
+        }
+        return res;
+         
+    }
+};
