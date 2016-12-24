@@ -1,0 +1,16 @@
+/* 非常好的算法 */
+int removeDuplicates(vector<int>& nums) 
+    {
+        if(nums.empty()) return 0;
+        int n = nums.size();
+        if(n==1) return 1;
+        
+        int cnt=0;
+        for(auto i = nums.begin()+1;i<nums.end();i++)
+        {
+            if(*i==*(i-1))  cnt++;
+            else *(i-cnt)=*i;
+        }
+        return n-cnt;
+        
+    }
