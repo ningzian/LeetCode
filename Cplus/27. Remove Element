@@ -1,0 +1,25 @@
+/* vector删除元素耗时太长，*/
+    int removeElement(vector<int>& nums, int val) 
+    {
+        if(nums.empty())return 0;
+        int a = 0;
+        int b = nums.size()-1;
+        while(a<b)
+        {
+            if(nums[a]!=val)
+                a++;
+            else if(nums[b]==val)
+                b--;
+            else
+            {
+                swap(nums[a],nums[b]);
+                a++;
+                b--;
+            }
+        }
+        if(nums[a]==val)return a;
+        else return a+1;
+        
+        
+        
+    }
