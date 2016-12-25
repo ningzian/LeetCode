@@ -1,0 +1,17 @@
+/* 字符串匹配算法有：朴素算法、Rabin-Karp算法、有限自动机算法、Knuth-Morris-Pratt算法 */
+int strStr(string haystack, string needle) 
+    {
+        //直接用标准库函数的查找
+        /*auto it = haystack.find(needle);
+        if(it==string::npos) return -1;
+        else return it;*/
+        //暴力求解算法（朴素算法）
+        for(int i=0;;i++)
+            for(int j = 0;;j++)
+            {
+                if(j==needle.size()) return i;
+                if(i+j ==haystack.size()) return -1;
+                if(needle[j]!=haystack[i+j]) break;
+            }
+        
+    }
