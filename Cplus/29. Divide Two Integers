@@ -1,0 +1,27 @@
+/* 用到的知识点：左移位运算、求绝对值、int最小值取绝对值时溢出 */
+int divide(int dividend, int divisor) {
+        //溢出的情况
+        if((!divisor)||((dividend==INT_MIN)&&(divisor==-1))) return INT_MAX;
+        //符号,1表示为负，0表示为正
+        bool sign = ((dividend<0)^(divisor<0))? 1:0;
+        //取绝对值
+        long a = labs(dividend);
+        long b = labs(divisor);
+        
+        int res = 0;
+        while(a>=b)
+        {
+            long tem = b, mul = 1;
+            while(a>=(tem<<1))
+            {
+                tem <<=1;
+                mul<<=1;
+            }
+            a -=tem;
+            res += mul;
+        }
+        return sign? -res:res;
+        
+        
+        
+    }
