@@ -1,0 +1,28 @@
+/* 全排列问题，把所有的全排列按从小到大排列，找出下一个。
+  算法：先从后往前，找到比下一个大的数。。。。 */
+void nextPermutation(vector<int>& nums) 
+    {
+	    if (nums.empty()) return;
+	    auto i = nums.end() - 1;
+	    do
+	    {
+		    if (i == nums.begin())
+		    {
+			    sort(nums.begin(), nums.end());
+			    return;
+		    }
+	    } while ((*i) <= *(--i));
+	
+
+	    auto j = nums.end() - 1;
+	    while (((*j) <= (*i))&&(j>i))
+	    {
+	        j--;
+	    }
+	    swap(*i, *j);
+	    reverse(i+1, nums.end());
+	    
+	    
+
+
+    }
