@@ -1,0 +1,29 @@
+//同样是二分法，即使相等，也可以继续找
+vector<int> searchRange(vector<int>& nums, int target) 
+    {
+        vector<int> res(2,-1);
+        int i = 0, j = nums.size()-1;
+        //寻找左边界
+        while(i<j)
+        {
+            int mid = (i+j)/2;
+            if(nums[mid]<target)i=mid+1;
+            else if(nums[mid]>target)j=mid-1;
+            else j = mid;
+        }
+        if(nums[i]!=target) return res;
+        else res[0]=i;
+        //寻找右边界
+        j = nums.size()-1;
+        while(i<j)
+        {
+            int mid = (i+j)/2+1;
+            if(nums[mid]<target)i=mid+1;
+            else if(nums[mid]>target)j=mid-1;
+            else i = mid;
+        }
+        res[1]=i;
+        
+        return res;
+        
+    }
