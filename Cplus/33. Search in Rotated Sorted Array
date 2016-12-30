@@ -1,0 +1,28 @@
+/* 二分法求 重点是真正中值的位置计算 */
+int search(vector<int>& nums, int target) {
+        int i = 0, n = nums.size();
+        int j = n-1;
+        //二分法求最小值
+        while(i<j)
+        {
+            int mid = (i+j)/2;
+            if(nums[mid]>nums[j]) i = mid+1;
+            else j = mid;
+        }//此时i=j,为最小的元素，也就是中间轴
+        //同样二分法寻找target
+        int rot = i;
+        i = 0, j = n-1;
+        while(i<=j)
+        {
+            int mid = (i+j)/2;
+            int realmid = (mid+rot)%n; //真正的，中间数值所在的位置（这里不懂！！！！为什么要对n求余）用减号也行，但有时候不行
+            if(nums[realmid]==target) return realmid;
+            if(nums[realmid]<target) i=mid+1;
+            else j = mid-1;
+            
+        }
+        return -1;
+        
+        
+        
+    }
