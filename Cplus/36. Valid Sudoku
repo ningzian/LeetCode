@@ -1,0 +1,26 @@
+//检测同一行，同一列，此时的小方块，有没有这个数。
+bool isValidSudoku(vector<vector<char>>& board) {
+        bool row[9][9]={0};
+        bool col[9][9]={0};
+        bool box[9][9]={0};
+        
+        for(int i = 0;i<9;i++)
+            for(int j = 0;j<9;j++)
+            {
+                if(board[i][j]!='.')
+                {
+                   int num = board[i][j]-'0'-1;
+                   int k = i/3+j/3*3;
+                   
+                   if(row[i][num]||col[j][num]||box[k][num]) return false;
+                   else
+                   {
+                       row[i][num]=1;
+                       col[j][num]=1;
+                       box[k][num]=1;
+                   }
+                }
+            }
+            return true;
+        
+    }
