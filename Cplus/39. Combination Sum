@@ -1,0 +1,26 @@
+/* 回溯法 */
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<int> com;
+        vector<vector<int>> res;
+        
+        combination(candidates,target,res,com,0);
+        return res;
+        
+        
+    }
+    
+    void combination(vector<int>& candidates, int target, vector<vector<int>>& res, vector<int>& com, int begin)
+    {
+        if(target==0)
+        {
+            res.push_back(com);
+            return;
+        }
+        for(int i=begin;i<candidates.size()&&target>=candidates[i];i++)
+        {
+            com.push_back(candidates[i]);
+            combination(candidates,target-candidates[i],res,com,i);
+            com.pop_back();
+        }
+    }
