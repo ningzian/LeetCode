@@ -1,0 +1,27 @@
+// 1是开头，计算第n个是什么
+string countAndSay(int n) {
+        string tem="1";
+        for(int i=1;i<n;i++)
+        {
+            char cnt='1';
+            string t;
+            for(auto i=tem.begin();i<tem.end();i++)
+            {
+                if((i<tem.end()-1)&&(*i == *(i+1))) 
+                {
+                    cnt++;
+                    continue;
+                }
+                else
+                {
+                    t.push_back(cnt);
+                    t.push_back(*i);
+                    cnt='1';
+                }
+            }
+            tem = t;
+            
+        }
+        return tem;
+        
+    }
