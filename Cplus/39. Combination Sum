@@ -21,6 +21,6 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         {
             com.push_back(candidates[i]);
             combination(candidates,target-candidates[i],res,com,i);
-            com.pop_back();
+            com.pop_back();   //这里是重点
         }
     }
