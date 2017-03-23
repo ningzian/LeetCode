@@ -1,0 +1,27 @@
+//回溯算法，递归调用，注意重复的消除，125和125，但是不能消除116，所以检测重复的位置在最后
+   vector<vector<int>> combinationSum2(vector<int>& candidates, int target) 
+    {
+        vector<vector<int>> res;
+        vector<int> local;
+        sort(candidates.begin(),candidates.end());
+        combine(res, candidates.begin(), target, local, candidates);
+        return res;
+    }
+    
+    void combine(vector<vector<int>> &res, vector<int>::iterator it, const int target, vector<int> &local, const vector<int> &candidates)
+    {
+        if(target == 0)
+        {
+            res.push_back(local);
+            return;
+        }
+        for(;it<candidates.end();it++)
+        {
+            if(*it>target) return;
+            local.push_back(*it);
+            combine(res, it+1, target-(*it), local, candidates);
+            local.pop_back();
+            while(it<candidates.end() && *it == *(it+1)) it++；   //检测重复在这里，重点！！！
+        }
+        
+    }
