@@ -1,0 +1,46 @@
+//
+void add(string &ans, int tem, int it)//tem是两位整数,ans+tem，从it位开始加
+{
+	ans[it] += (tem % 10);
+	if (ans[it]>'9')
+	{
+		ans[it] -= 10;
+		ans[--it]++;
+	}
+	else it--;
+	ans[it] += (tem / 10);
+	if (ans[it]>'9')
+	{
+		ans[it] -= 10;
+		ans[--it]++;
+	}
+	else if(it == 0) return;
+	else it--;
+	if (ans[it]>'9')
+	{
+		ans[it] -= 10;
+		ans[--it]++;
+	}
+}
+
+string multiply(string num1, string num2)
+{
+
+	string ans(num1.size() + num2.size(), '0');//预定义结果的长度是两个字符串长度的和
+
+	int i = num1.size() - 1;
+	
+	for (; i >= 0; i--)
+	{
+		int j = num2.size() - 1;
+		for (; j >= 0; j--)
+		{
+			int tem = (num1[i] - '0')*(num2[j] - '0');
+			add(ans, tem, i + j + 1);
+		}
+	}
+	//去掉开始的'0'
+	auto it = ans.find_first_not_of('0');
+	if (it != string::npos) return ans.substr(it);//返回子串
+	else return "0";
+}
