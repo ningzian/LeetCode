@@ -1,0 +1,29 @@
+    主要是第一个元素不能重合
+    首先排序一下，让重复的元素都相邻，然后交换的时候保存值，
+    1122，  先是1位首元素，排列122，但不实际改变nums。
+    然后1和2交换，变为2112，排列112，也不改变nums。
+    这时，要交换最后一个数，两个相等，就跳过了。
+    好巧妙的方法使得为首的元素不重复
+    void backtrace(vector<vector<int>> &ans, vector<int> nums, int it)
+    {
+        if(it == nums.size()-1) 
+        {
+            ans.push_back(nums);
+            return;
+        }
+        
+        for(int i = it;i<nums.size();i++)
+        {
+            if((i!=it)&&(nums[i] == nums[it])) continue;
+            swap(nums[i],nums[it]);
+            backtrace(ans, nums, it+1);
+        }
+    }
+    
+    vector<vector<int>> permuteUnique(vector<int>& nums) 
+    {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>> ans;
+        backtrace(ans, nums, 0);
+        return ans;
+    }
