@@ -1,0 +1,37 @@
+/*
+ * 顺时针旋转
+ * 首先上下颠倒, 然后求转置 
+ * 1 2 3     7 8 9     7 4 1
+ * 4 5 6  => 4 5 6  => 8 5 2
+ * 7 8 9     1 2 3     9 6 3
+*/
+/*
+ * anticlockwise rotate
+ * first reverse left to right, then swap the symmetry
+ * 1 2 3     3 2 1     3 6 9
+ * 4 5 6  => 6 5 4  => 2 5 8
+ * 7 8 9     9 8 7     1 4 7
+*/
+    void rotate(vector<vector<int>>& matrix) 
+    {
+        reverse(matrix.begin(), matrix.end());       //reverse是颠倒，swap是交换！！！！！！
+                                                     //reverse的参数是迭代器，swap的参数是值
+                                                     //reverse中包含swap
+        
+        /*int i = 0;
+        int j = matrix.size()-1;
+        while(i<j)
+        {
+            swap(matrix[i],matrix[j]);
+            i++;
+            j--;
+        }*/
+        
+        for(int i = 0;i<matrix.size();i++)
+        {
+            for(int j = i+1;j<matrix.size();j++)
+            {
+                swap(matrix[i][j],matrix[j][i]);
+            }
+        }
+    }
