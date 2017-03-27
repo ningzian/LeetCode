@@ -1,0 +1,20 @@
+    vector<vector<string>> groupAnagrams(vector<string>& strs) 
+    {
+        //最主要是用什么方法判断 eat,tea归为一组
+        //比如排序，都可以变为aet，即可判断相等，归为一组
+        //可以利用两个素数相乘不相等来判断，（这个没有证明）
+        
+        map<string,vector<string>> mp;
+        for(auto i = strs.begin();i!=strs.end();i++)
+        {
+            string t = *i;
+            sort(t.begin(),t.end());
+            mp[t].push_back(*i);
+        }
+        vector<vector<string>> ans;
+        for(auto i:mp)
+        {
+            ans.push_back(i.second);
+        }
+        return ans;
+    }
