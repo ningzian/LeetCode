@@ -1,0 +1,28 @@
+   特别机智的算法，不用考虑很多的条件，只需一行一行的输出
+   Spiral Matrix
+   1 2 3
+   4 5 6
+   7 8 9    输出：123698745
+   
+   vector<int> spiralOrder(vector<vector<int>>& matrix)
+    { 
+        vector<int> ans;
+        if(matrix.empty()) return ans;
+        int u = 0;                  //最上面的
+        int d = matrix.size()-1;    //最下面的
+        int l = 0;                  //最左边的
+        int r = matrix.front().size()-1;//最右面的
+        while(1)
+        {
+            for(int i = l;i<=r;i++) ans.push_back(matrix[u][i]);//最上面一行
+            if(++u>d) break;
+            for(int i = u;i<=d;i++) ans.push_back(matrix[i][r]);//最右边一列
+            if(--r<l) break;
+            for(int i = r;i>=l;i--) ans.push_back(matrix[d][i]);//最下面一行
+            if(--d<u) break;
+            for(int i = d;i>=u;i--) ans.push_back(matrix[i][l]);//最左边一列
+            if(++l>r) break;
+            
+        }
+        return ans;
+    }
