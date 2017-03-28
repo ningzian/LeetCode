@@ -1,0 +1,16 @@
+    动态扩张（自己起的名），非常巧妙
+    维护一个变量（最远到达，maxreach），实时更新。
+    循环结束的时候，再看看有没有到达最后一个数
+    
+    
+    bool canJump(vector<int>& nums) 
+    {
+        int n = nums.size();
+        int i = 0;
+        int maxreach = 0;
+        
+        for(;i<n && maxreach<n && i<=maxreach; i++) maxreach =  max(maxreach,i+nums[i]);
+        
+        if(maxreach>=(n-1)) return true;
+        else return false;
+    }
