@@ -1,0 +1,33 @@
+跟54题相似
+
+
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) 
+    {
+        int u = 0;
+        int l = 0;
+        int d = n-1;
+        int r = n-1;
+        
+        vector<vector<int>> ans(n,vector<int>(n,0));
+        int i = 1;
+        while(1)
+        {
+            for(int col = l;col<=r;col++) { ans[u][col] = i; i++; }
+            if(++u>d)break;
+            
+            for(int row = u;row<=d;row++) { ans[row][r] = i; i++; }
+            if(--r<l)break;
+            
+            for(int col = r;col>=l;col--) { ans[d][col] = i; i++; }
+            if(--d<u)break;
+            
+            for(int row = d;row>=u;row--) { ans[row][l] = i; i++; }
+            if(++l>r)break;
+            
+                
+        }
+        return ans;
+    }
+};
