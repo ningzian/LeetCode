@@ -1,0 +1,35 @@
+方法1：类似于动态规划
+方法2：组合排序问题
+class Solution {
+public:
+
+    /*int uniquePaths(int m, int n) 
+    {
+        if(m>n) return uniquePaths(n,m);
+        
+        vector<int> ans(m,1);
+        
+        for(int i = 1;i<n;i++)
+        {
+            for(int j = 1;j<m;j++)
+            {
+                ans[j] += ans[j-1];
+            }
+        }
+        return ans[m-1];
+    }*/
+    int uniquePaths(int m, int n) 
+    {
+        if(m>n) return uniquePaths(n,m);
+        
+        n--;m--;
+        long ans = 1;
+        int j = 1;
+        for(int i = n+1;i<=m+n;i++,j++)
+        {
+            ans *= i;
+            ans /= j;
+        }
+        return (int)ans;
+    }
+};
