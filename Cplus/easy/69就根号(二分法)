@@ -1,0 +1,24 @@
+//必须是这种顺序，因为要求的是平方不大于x，比如，6的开方等于2
+
+class Solution {
+public:
+//二分法
+    int mySqrt(int x) 
+    {
+        if(x == 0) return 0;
+        int left = 1;
+        int right = INT_MAX;
+        
+        while(left<right)
+        {
+            int mid = left+(right-left)/2;
+            if(x/mid < mid) right = mid-1;
+            else 
+            {
+                if(x/(mid+1) < (mid+1)) return mid;
+                left = mid+1;
+            }
+        }
+        return left;
+    }
+};
