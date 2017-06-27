@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) 
+    {
+        int n = nums.size();
+        vector<int> dp;  //dp[i]是包含nums[i]的最大子数组，也就是从nums[i]开始连续往前和最大的
+        
+        dp.push_back(nums.front());
+        int max = nums.front();
+        
+        for(auto i = nums.begin()+1 ;i<nums.end();i++)
+        {
+            int tem = *i + (dp.back()>0? dp.back():0);
+            if (tem>max) max = tem;
+            dp.push_back(tem);
+            
+        }
+        return max;
+        
+        
+    }
+};
