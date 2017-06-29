@@ -1,0 +1,62 @@
+Given an absolute path for a file (Unix-style), simplify it.
+
+For example,
+path = "/home/", => "/home"
+path = "/a/./b/../../c/", => "/c"
+Corner Cases:
+Did you consider the case where path = "/../"?
+In this case, you should return "/".
+Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
+In this case, you should ignore redundant slashes and return "/home/foo".
+
+
+
+class Solution {
+public:
+    string simplifyPath(string path) 
+    {
+        vector<string> ans;
+        string tem;
+        //主循环计算
+        for(auto i = path.begin();i<path.end();i++)
+        {
+            if(*i == '/')// 遇到一个/
+            {
+                if(!tem.empty())//遇到一个目录
+                {
+                    if(tem == "..") //后退一个目录
+                    {
+                        if(!ans.empty()) ans.pop_back();
+                    }
+                    else if(tem == ".");//不变
+                    else ans.push_back(tem); //前进一个目录
+                }
+                tem.erase(tem.begin(),tem.end());//暂时存储当前的目录
+                
+            }
+            else
+            {
+                tem.push_back(*i);
+            }
+        }
+        //最后一个目录
+        if(!tem.empty())
+        {
+            if(tem == "..") //后退一个目录
+            {
+                if(!ans.empty()) ans.pop_back();
+            }
+            else if(tem == ".") ;//不变
+            else ans.push_back(tem); //前进一个目录
+        }
+        //返回结果
+        if(ans.empty()) return "/";
+        string f;
+        for(auto i:ans)
+        {
+            f.push_back('/');
+            f+=i;
+        }
+        return f;
+    }
+};
